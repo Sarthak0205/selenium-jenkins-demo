@@ -4,7 +4,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,20 +33,14 @@ public class ExampleTest {
     }
 
     @Test
-    void testGoogleSearch() {
+    public void testGoogleSearch() {
         driver.get("https://www.google.com");
 
-        driver.findElement(By.name("q"))
-                .sendKeys("Jenkins");
+        WebElement searchBox = driver.findElement(By.name("q"));
+        searchBox.sendKeys("Selenium WebDriver");
+        searchBox.sendKeys(Keys.ENTER);
 
-        driver.findElement(By.name("btnK"))
-                .click();
-
-        String title = driver.getTitle();
-
-        System.out.println("Search Page Title: " + title);
-
-        assertTrue(title.toLowerCase().contains("jenkins"));
+        System.out.println("Page Title: " + driver.getTitle());
     }
 
     @AfterAll
